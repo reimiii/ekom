@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "@tailwindcss/line-clamp": "^0.4.2",
-        "clsx": "^1.2.1"
+        "clsx": "^1.2.1",
+        "react-hot-toast": "^2.4.0"
     }
 }

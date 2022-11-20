@@ -5,7 +5,7 @@ import NavLink from '@/Components/NavLink';
 import DropdownMenu from '@/Components/DropdownMenu';
 
 export const Navbar = () => {
-    const {auth} = usePage().props;
+    const {auth, categories_global} = usePage().props;
     return (
         <>
             <nav className="bg-white border-b py-2">
@@ -14,7 +14,14 @@ export const Navbar = () => {
                         <ApplicationLogo/>
                         <div className="flex items-center gap-x-6">
                             <NavLink href={`/`}>Home</NavLink>
-                            <NavLink href={route('p.index')}>Product</NavLink>
+                            <NavLink href={route('products.index')}>Product</NavLink>
+                            <DropdownMenu label={`Categories`}>
+                                {categories_global.map(category => (
+                                    <DropdownMenu.Link key={category.slug} href={`/products?category=${category.slug}`}>
+                                        {category.name}
+                                    </DropdownMenu.Link>
+                                )) }
+                            </DropdownMenu>
                             {auth.user ?
                                 <>
                                     <DropdownMenu label={auth.user.name}>
