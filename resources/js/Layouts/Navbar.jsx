@@ -14,12 +14,15 @@ export const Navbar = () => {
                         <ApplicationLogo/>
                         <div className="flex items-center gap-x-6">
                             <NavLink href={`/`}>Home</NavLink>
-                            <NavLink href={route('dashboard')}>Dashboard</NavLink>
+                            <NavLink href={route('p.index')}>Product</NavLink>
                             {auth.user ?
                                 <>
                                     <DropdownMenu label={auth.user.name}>
                                         <DropdownMenu.Link href={route('profile.edit')}>Profile</DropdownMenu.Link>
-                                        <DropdownMenu.Link href={route('logout')} method={`post`}>Log Out</DropdownMenu.Link>
+                                        <DropdownMenu.Link href={route('dashboard')}>Dashboard</DropdownMenu.Link>
+                                        <DropdownMenu.Link href={route('logout')} method={`post`}>
+                                            Log out
+                                        </DropdownMenu.Link>
                                     </DropdownMenu>
                                 </> :
                                 <>
