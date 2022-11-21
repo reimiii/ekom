@@ -1,7 +1,7 @@
 import React from 'react';
 import App from '@/Layouts/App';
 import { Head } from '@inertiajs/inertia-react';
-import Container from '@/Components/Container';
+import {Container} from '@/Components/Container';
 import Table from '@/Components/Table';
 import Card from '@/Components/Card'
 import Pagination from '@/Components/Pagination'
