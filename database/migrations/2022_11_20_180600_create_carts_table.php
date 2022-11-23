@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->double('price');
+            $table->dateTime('paid_at')->nullable();
             $table->timestamps();
         });
     }

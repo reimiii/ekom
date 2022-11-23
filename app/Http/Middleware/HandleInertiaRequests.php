@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Cart;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -35,6 +36,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
+        $chartBelongsToRequestUser = Cart::whereBelongsTo($request->user())->whereNull('paid_at')->count();
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user(),
@@ -43,6 +45,7 @@ class HandleInertiaRequests extends Middleware
                 'name' => $q->name,
                 'slug' => $q->slug
             ])),
+            'charts_global_count' => $request->user() ? cache()->rememberForever('charts_global_count', fn() => $chartBelongsToRequestUser) : null,
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),

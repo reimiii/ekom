@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
+Route::post('cart/{product:slug}', [\App\Http\Controllers\CartsController::class, 'store'])->name('cart.store');
 Route::resource('products', \App\Http\Controllers\ProductsController::class);
 
 Route::middleware('auth')->group(function () {
