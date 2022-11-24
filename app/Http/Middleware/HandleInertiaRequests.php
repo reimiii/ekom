@@ -36,7 +36,12 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
-        $chartBelongsToRequestUser = Cart::whereBelongsTo($request->user())->whereNull('paid_at')->count();
+        $chartBelongsToRequestUser = Cart::query()
+            ->when($request->user(), function ($q) use ($request) {
+                $q->whereBelongsTo($request->user());
+            })
+            ->whereNull('paid_at')
+            ->count();
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user(),
